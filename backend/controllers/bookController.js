@@ -1,6 +1,7 @@
 const Book = require("../models/bookModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const ApiFeatures = require("../utils/apifeatures");
 
 //Create Product --ADMIN
 exports.createBook = catchAsyncErrors(async (req, res, next) => {
@@ -13,7 +14,8 @@ exports.createBook = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Books
 exports.getAllbooks = catchAsyncErrors(async (req, res) => {
-  const books = await Book.find();
+  const apifeature = new ApiFeatures(Book.find(), req.query).search();
+  const books = await apifeature.query;
   res.status(200).json({
     success: true,
     books,

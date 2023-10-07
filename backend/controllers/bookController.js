@@ -14,11 +14,16 @@ exports.createBook = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Books
 exports.getAllbooks = catchAsyncErrors(async (req, res) => {
-  const apifeature = new ApiFeatures(Book.find(), req.query).search();
+  const resultPerPage = 5;
+  const bookCount = await Book.countDocuments();
+  const apifeature = new ApiFeatures(Book.find(), req.query)
+    .search()
+    .pagination(resultPerPage);
   const books = await apifeature.query;
   res.status(200).json({
     success: true,
     books,
+    bookCount,
   });
 });
 

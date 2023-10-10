@@ -18,6 +18,10 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter about Book"],
   },
+  ratings: {
+    type: Number,
+    default: 0,
+  },
   images: {
     public_id: {
       type: String,
@@ -34,6 +38,11 @@ const bookSchema = new mongoose.Schema({
   },
   reviews: [
     {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
       name: {
         type: String,
         required: true,

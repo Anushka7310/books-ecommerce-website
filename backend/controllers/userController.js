@@ -5,9 +5,10 @@ const sendToken = require("../utils/jwtToken");
 
 //Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
   const user = await User.create({
     name,
+    role,
     email,
     password,
     avatar: {
@@ -36,4 +37,16 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Invalid email or password", 401));
   }
   sendToken(user, 200, res);
+});
+
+//Logout User
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+  res.status(200).json({
+    success: true,
+    message: "Logged Out",
+  });
 });

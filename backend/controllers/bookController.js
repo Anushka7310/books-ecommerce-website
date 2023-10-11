@@ -3,7 +3,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 
-//Create Product --ADMIN
+//Create Book --ADMIN
 exports.createBook = catchAsyncErrors(async (req, res, next) => {
   const book = await Book.create(req.body);
   res.status(201).json({
@@ -14,7 +14,7 @@ exports.createBook = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Books
 exports.getAllbooks = catchAsyncErrors(async (req, res) => {
-  const resultPerPage = 5;
+  const resultPerPage = 8;
   const bookCount = await Book.countDocuments();
   const apifeature = new ApiFeatures(Book.find(), req.query)
     .search()
@@ -31,7 +31,7 @@ exports.getAllbooks = catchAsyncErrors(async (req, res) => {
 exports.getBookDetails = catchAsyncErrors(async (req, res, next) => {
   const book = await Book.findById(req.params.id);
   if (!book) {
-    return next(new ErrorHander("PRODUCT NOT FOUND", 404));
+    return next(new ErrorHander("BOOK NOT FOUND", 404));
   }
   res.status(200).json({
     success: true,
@@ -60,7 +60,7 @@ exports.updateBook = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//Delete Product
+//Delete Book
 exports.deleteBook = catchAsyncErrors(async (req, res, next) => {
   const book = await Book.findById(req.params.id);
   if (!book) {
@@ -86,8 +86,13 @@ exports.createBookReview = catchAsyncErrors(async (req, res, next) => {
     rating: Number(rating),
     comment,
   };
-
   const book = await Book.findById(bookId);
+
+  if (!book) {
+    return next(new ErrorHander("Book not found", 404));
+  }
+
+
   const isReviewed = book.reviews.find(
     (rev) => rev.user.toString() === req.user._id.toString()
   );
@@ -136,14 +141,14 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   }
 
   const reviews = book.reviews.filter((rev) => {
-    return rev._id.toString() === req.query.id.toString();
+    return rev._id.toString() !== req.query.id.toString();
   });
 
   let avg = 0;
   reviews.forEach((rev) => {
     avg += rev.rating;
   });
-  const ratings = avg / reviews.length;
+  const ratings = avg / reviews.length || 0;
 
   const numOfReviews = reviews.length;
   await Book.findByIdAndUpdate(

@@ -22,7 +22,11 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  images: {
+  stock: {
+    type: Number,
+    default: 1,
+  },
+  images: [{
     public_id: {
       type: String,
       required: true,
@@ -31,7 +35,7 @@ const bookSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-  },
+  }],
   numOfReviews: {
     type: Number,
     default: 0,

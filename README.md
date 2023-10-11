@@ -11,23 +11,10 @@
 - Add books to a shopping cart and proceed to checkout.
 - View detailed information about a book.
 - Calculate the total price during the checkout process.
-## Running the Application
-
-To run the project locally, follow these steps:
-
-### Frontend (Client)
-1. Navigate to the `client` directory: `cd client`.
-2. Install dependencies: `npm install`.
-3. Start the development server: `npm run start`.
-
-### Backend (Server)
-1. Navigate to the `server` directory: `cd server`.
-2. Install dependencies: `npm install`.
-3. Start both the frontend and backend servers concurrently: `npm run dev`.
 
 ## Setting Up Credentials
 
-To run the application successfully, you need to set up your credentials. Create a `.env` file in the project root directory and add the following placeholders for your credentials:
+To run the application successfully, you need to set up your credentials. Add the following placeholders for your credentials in config.env file in backened folder:
 
 ```dotenv
 # .env
@@ -62,6 +49,21 @@ SMTP_HOST=
 SMTP_PORT=
 
 ```
+
+## Running the Application
+
+To run the project locally, follow these steps:
+
+### Frontend
+1. Navigate to the `frontend` directory: `cd frontend`.
+2. Install dependencies: `npm install`.
+3. Start the development server: `npm run start`.
+
+### Backend
+1. Navigate to the root directory of the project.
+2. Install dependencies: `npm install`.
+3. Start backend server: `npm run dev`.
+
 
 # Postman Collection for Testing Reference
 [Ecommerce.postman_collection.json](https://github.com/Anushka7310/books-ecommerce-website/files/12872281/Ecommerce.postman_collection.json)

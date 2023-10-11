@@ -1,4 +1,9 @@
 # Online Bookstore Application
+## Video Walkthrough
+
+For a detailed walkthrough of the application's functionality, you can watch the following Loom video:
+
+[**Watch the Video Walkthrough**](https://www.loom.com/share/4529571da6c94a3fa232abfd63699191)
 ## Project Overview
 
 ## Features

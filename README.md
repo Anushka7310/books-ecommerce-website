@@ -76,10 +76,12 @@ To run the project locally, follow these steps:
 
 ## Access the Deployed Application
 
-
 You can access the deployed version of this application by following the link below:
 
 [**Open the Application**](https://book-ecommerce-application-ccdebfb62ef0.herokuapp.com/)
+
+![book](https://github.com/Anushka7310/books-ecommerce-website/assets/61081130/f80d99fb-2d69-4e20-8bb4-1a68ed4eb991)
+
 
 
 
